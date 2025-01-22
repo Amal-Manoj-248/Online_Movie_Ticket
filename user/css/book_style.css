@@ -1,0 +1,236 @@
+    /* Include relevant styles from your uploaded CSS */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+  
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: white;
+        color: black;
+        line-height: 1.6;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+  
+      .parent{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+      }
+  
+      .container1 {
+              display: flex;
+              margin: 20px;  
+        width: 40%;
+        background-color: #333;
+        border: 5px solid goldenrod;
+        border-style: groove;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        position: relative;
+          }
+  
+          .seat-selection {
+              width: 45%;
+              padding: 20px;
+          }
+          .form-details {
+              width: 70%;
+              padding: 10px;
+              margin-left: 100px;
+              color: goldenrod;
+          }
+          .form-group {
+              margin-bottom: 10px;
+          }
+          label {
+              display: block;
+              font-weight: bold;
+              color: darkorange;
+          }
+          input, select {
+              width: 100%;
+              padding: 8px;
+              margin-top: 5px;
+              margin-bottom: 10px;
+              font-size: 18px;
+          }
+          button {
+              padding: 10px 20px;
+              border-radius: 10px;
+              background-color: gold;
+              color: black;
+              font-size: 16px;
+              border: none;
+              margin: 15px;
+              cursor: pointer;
+          }
+          button:hover {
+              background-color:goldenrod ;
+          }
+          .payment-section {
+              margin-top: 20px;
+          }
+          .qr-code {
+              margin-top: 10px;
+          }
+          .actions {
+              display: flex;
+              justify-content: space-between;
+          }
+          
+      .movie-container1 {
+        margin-bottom: 30px;
+        text-align: center;
+        background-color: black;
+        border: 5px solid goldenrod;
+        border-style: groove;
+        border-radius: 10px;
+        width: 80%;
+       margin-left: 125px;
+      }
+      .movie-container {
+        margin-bottom: 30px;
+        text-align: center;
+      }
+  
+      select {
+        text-align: center;
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 16px;
+        background-color: black;
+        color: goldenrod;
+      }
+  
+      .container {
+        margin: 20px;
+        max-width: 1000px;
+        width: 60%;
+        background-color: #333;
+        border: 5px solid goldenrod;
+        border-style: groove;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        position: relative;
+      }
+  
+      .screen {
+        background-color: whitesmoke;
+        height: 50px;
+        width: 100%;
+        padding: 40px;
+        margin-bottom: 20px;
+        text-align:center;
+        color: maroon;
+        font-size: 30px;
+        font-weight: bolder;
+        line-height: 50px;
+        border-radius: 5px;
+      }
+  
+      .section {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 40px;
+      }
+  
+      .left, .right, .middle {
+        width: 30%;
+      }
+  
+      .row {
+        display: flex;
+        justify-content: space-between;
+      }
+  
+      .seat {
+    background-color: #444451;
+    height: 40px;
+    width: 100px;
+    margin: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  
+  .seat.none {
+    background-color: grey;
+    color: black;
+  }
+  
+  .seat.classic {
+    background-color: lightpink;
+    color: black;
+  }
+  
+  .seat.prime {
+    background-color: lightblue;
+    color: black;
+  }
+  
+  .seat.premium {
+    background-color: lightyellow;
+    color: black;
+  }
+  
+  .seat.occupied {
+    background-color: #fff;
+    pointer-events: none;
+    color: black;
+  }
+  
+  /* Change color when a seat is selected */
+  .seat.classic.selected {
+    background-color: rgb(245, 53, 53);
+    color: black;
+  }
+  
+  .seat.prime.selected {
+    background-color: rgb(57, 57, 235);
+    color: black;
+  }
+  
+  .seat.premium.selected {
+    background-color: gold;
+    color: black;
+  }
+  
+      .text {
+        margin-top: 20px;
+        font-size: 25px;
+        padding: 15px;
+        font-weight: bolder;
+        color: black;
+        border-color: 10px white;
+        border-style: groove;
+        background-color: lightsalmon;
+      }
+  
+      /* Showcase Legend */
+      .showcase {
+            display: flex;
+            justify-content: space-around;
+      }
+  
+      .showcase li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+  
+      .showcase .seat {
+        margin-right: 10px;
+      }
+  
+      .showcase small {
+        color: greenyellow;
+      }

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book My Movie</title>
+    <link rel="icon" href="../img/dup.webp">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link rel="stylesheet" href="../css/style.css"> <!-- Link to your CSS for consistency -->
+    <style>
+        /* Ensure the movie section matches the overall theme */
+        .media-container {
+            display: flex;
+            justify-content: space-between;
+            height: 50vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .movie-poster {
+            width: 25%;
+            height: 500px;
+            background-image: url('../img/dead.jpg'); /* Replace with your image */
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-style:groove;
+            border-color: gold;
+        }
+
+        .movie-trailer {
+            width: 70%;
+            height: 500px;
+            margin-left: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-style:groove;
+            border-color: gold;
+        }
+
+
+.container {
+    display: flex;
+    height: 80vh;
+    width: 100%;
+}
+
+.left-section {
+    flex: 2;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: ghostwhite;
+    height:fit-content;
+    border-radius: 10%;
+    margin-left: 20px;
+    border-style:groove;
+    border-color: gold;
+}
+
+.movie-info {
+    max-width: auto;
+}
+
+.movie-info h1 {
+    font-size: 50px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-bottom: 20px;
+    color: rgb(0, 0, 0);
+}
+
+.movie-info p {
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+.learn-more {
+    background: none;
+    border: none;
+    color: rgb(52, 9, 240);
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 0;
+    position: relative;
+}
+
+.learn-more::after {
+    content: '→';
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+
+
+.right-section {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 50px;
+    background-color: ghostwhite;
+    height:fit-content;
+    border-radius: 10%;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-style:groove;
+    border-color: gold;
+}
+
+
+.movie-details p {
+    font-size: 18px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+.movie-details strong {
+    font-weight: 600;
+}
+
+.book-now {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #ff0000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .book-now:hover {
+            background-color: #0056b3;
+        }
+
+        .rating {
+            color: #FFD700; /* Gold color for stars */
+            font-size: 1.5em;
+        }
+
+        @media (max-width: 768px) {
+            .media-container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .movie-poster, .movie-trailer {
+                width: 100%;
+                margin: 0;
+            }
+
+            .movie-trailer {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+</header>
+
+<div id="navbar">
+    <nav>
+        <a href="../home.html">Back to Home</a>
+    </nav>
+</div>
+<br>
+
+<h1 style="color: goldenrod;"><Center>Deadpool & Wolverine</Center></h1>
+<section style="height: 80vh;">
+    <div class="media-container">
+        <!-- Movie Poster -->
+        <div class="movie-poster"></div>
+
+        <!-- Movie Trailer -->
+        <div class="movie-trailer">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/73_1biulkYk?si=0djYNE4n-H3hLrm2"
+            frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-section">
+            <div class="movie-info">
+                <h1>Deadpool & Wolverine</h1>
+                <p>The movie centers around the iconic arch-nemesis and is an original, standalone story not seen before on the big screen. Phillips' exploration of Arthur Fleck, a man disregarded by society, is not only a gritty character study, but also a broader cautionary tale.</p>
+                <button class="learn-more">Learn More</button>
+                <br><br>
+                <a href="booking.html" class="book-now">Book Now</a>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <div class="movie-details">
+                <p><strong>Director : </strong> Todd Phillips</p>
+                <p><strong>Music By : </strong>  Hildur Guðnadóttir</p>
+                <p><strong>Language :</strong>  Hindi / Malayalam / Tamil /Telugu / Kannada</p>
+                <p><strong>Genres : </strong>  Action / Adventure / Drama / Period</p>
+                <p><strong>Format : </strong>  2D / 3D</p>
+                <p><strong>Duration : </strong>  2h 23m</p>
+                <p><strong>CBFC : </strong>  UA</p>
+                <p><strong>Rating ★ : </strong>  8.7 / 10</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy;2024 Book My Movie.<br> All rights reserved.</p>
+</footer>
+
+</body>
+</html>

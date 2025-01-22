@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book My Movie</title>
+    <link rel="icon" type="image/x-icon" href="../img/dup.webp">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link rel="stylesheet" href="../css/style.css"> <!-- Link to your existing CSS file -->
+</head>
+<body>
+
+    <header>
+    </header>
+    <div id="navbar">
+        <nav>
+            <a href="../home.html">Back to Home</a> <!-- Link to the home page -->
+        </nav>
+    </div>
+    <br><br>
+    <style>
+/* Main layout styling */
+.login-wrapper {
+    background-image: url(../img/trans1.jpg);
+    background-size: cover;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.login-container {
+    flex: 1;
+    padding: 30px;
+    background-color: white;
+    color: #333;
+    margin-left: 500px; 
+    border-radius: 20px; 
+    border-style: groove;
+    border-color: gold;
+
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    font-size: 25px;
+    color: goldenrod; /* Red title */
+}
+
+.login-container label {
+    font-size: 14px;
+    color: #333;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-options a {
+    font-size: 14px;
+    color: #999;
+    text-decoration: none;
+}
+
+.form-options a:hover {
+    color: red;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: gold;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: goldenrod;
+}
+
+.options {
+    text-align: center;
+    margin-top: 15px;
+}
+
+    </style>
+
+<section id="login">
+    <div class="login-wrapper">
+        <!-- Image Section -->
+     
+        <!-- Login Form Section -->
+        <div class="login-container">
+            <h2>Create your account</h2>
+            <form method="POST">
+
+                <label for="email">Your email</label>
+                <input type="email" id="email" name="email" placeholder="Your email" required>
+
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Your Username" required>
+
+                <label for="username">Phone no:</label>
+                <input type="text" id="username" name="username"  placeholder="Your Number"required>
+                
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Your Password" required>
+
+                <label for="password">Confirm Password</label>
+                <input type="password" id="password" name="password" placeholder="Your Password" required>
+
+                
+                <button type="submit" ><a href="login.html" style="text-decoration: none; color: white;">Login</a></button>
+            </form>
+        </div>
+    </div>
+
+</section>
+
+    
+
+   <footer>
+    <p>&copy;2024 Book My Movie.<br> All rights reserved.</p>
+</footer>
+
+</body>
+</html>
+

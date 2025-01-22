@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book My Movie</title>
+    <link rel="icon" href="../img/dup.webp">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+        }
+        .ticket-container {
+            background-color: #fff;
+            border: 5px solid gold;
+            border-radius: 40px;
+            border-style: groove;
+            padding: 20px;
+            width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .ticket-container h1 {
+            font-size: 40px;
+            font-family: "UnifrakturMaguntia", cursive;
+            color: goldenrod;
+        }
+        .ticket-container h2 {
+            font-size: 25px;
+            font-family: "UnifrakturMaguntia", cursive;
+            color: maroon;
+        }
+        .ticket-details {
+            font-size: 15px;
+        }
+        .ticket-details p {
+            font-size: 20px;
+            padding: 5px;
+            margin: 5px 0;
+        }
+        .ticket-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: gold;
+            color: black;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <div class="ticket-container">
+        <img src="../img/dup.webp" height="150px" width="300px">
+        <h1>Book My Movie</h1>
+        <h2>Your Movie Ticket Details</h2>
+        <div class="ticket-details">
+            <p><strong>Movie:</strong> <span id="movie-name"></span></p>
+            <p><strong>Name:</strong> <span id="user-name"></span></p>
+            <p><strong>Gender:</strong> <span id="gender"></span></p>
+            <p><strong>Age:</strong> <span id="age"></span></p>
+            <p><strong>Place:</strong> <span id="place"></span></p>
+            <p><strong>Theatre:</strong> <span id="theatre"></span></p>
+            <p><strong>Date:</strong> <span id="show-date"></span></p>
+            <p><strong>Show Time:</strong> <span id="show-time"></span></p>
+            <p><strong>Seats:</strong> <span id="seat-numbers"></span></p>
+            <p><strong>Total Amount:</strong> Rs. <span id="total-amount"></span></p>
+            
+        </div>
+        <button class="ticket-button" onclick="window.print()">Print Ticket</button>
+    </div>
+
+    <script>
+        // Retrieve form data from localStorage
+        const ticketDetails = JSON.parse(localStorage.getItem('ticketDetails'));
+
+        // Populate the ticket details
+        document.getElementById('movie-name').innerText = ticketDetails.movie;
+        document.getElementById('user-name').innerText = ticketDetails.userName;
+        document.getElementById('gender').innerText = ticketDetails.gender;
+        document.getElementById('age').innerText = ticketDetails.age;
+        document.getElementById('place').innerText = ticketDetails.place;
+        document.getElementById('theatre').innerText = ticketDetails.theatre;
+        document.getElementById('show-date').innerText = ticketDetails.date;
+        document.getElementById('show-time').innerText = ticketDetails.showTime;
+        document.getElementById('seat-numbers').innerText = ticketDetails.seats;
+        document.getElementById('total-amount').innerText = ticketDetails.amount;
+        
+        
+        
+    </script>
+</body>
+</html>

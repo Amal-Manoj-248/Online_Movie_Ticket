@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book My Movie</title>
+    <link rel="icon" href="../img/dup.webp">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link rel="stylesheet" href="../css/style.css"> <!-- Link to your existing CSS file -->
+</head>
+<body>
+
+    <header>
+    </header>
+    <div id="navbar">
+        <nav>
+            <a href="../home.html">Back to Home</a> <!-- Link to the home page -->
+        </nav>
+    </div>
+    <br><br>
+    <style>
+/* Main layout styling */
+.login-wrapper {
+    background-image: url(../img/peakpx2.jpg);
+    background-size: cover;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.login-container {
+    flex: 1;
+    padding: 30px;
+    background-color: white;
+    color: #333;
+    margin-left: 500px; 
+    border-radius: 20px; 
+    border-style: groove;
+    border-color: gold;
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    font-size: 25px;
+    color: goldenrod; /* Red title */
+}
+
+.login-container label {
+    font-size: 14px;
+    color: #333;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-options a {
+    font-size: 14px;
+    color: #999;
+    text-decoration: none;
+}
+
+.form-options a:hover {
+    color: red;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: gold;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: goldenrod;
+}
+
+.options {
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Forgot Password Modal */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.modal-content h2 {
+    color: goldenrod;
+    margin-bottom: 10px;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    background-color: gold;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background-color: goldenrod;
+}
+
+/* Close button for modal */
+.modal-content .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+    </style>
+
+<section id="login">
+    <div class="login-wrapper">
+        <!-- Image Section -->
+     
+        <!-- Login Form Section -->
+        <div class="login-container">
+            <h2>Login your account</h2>
+            <form action="/login" method="POST">
+                <label for="email">Your email</label>
+                <input type="email" id="email" name="email" placeholder="Your email" required>
+                
+                <label for="password">Your Password</label>
+                <input type="password" id="password" name="password" placeholder="Your Password" required>
+
+                <div class="form-options">
+                    <a href="#" id="forgotPassword">Forget Password?</a>
+                </div>
+                
+                <button type="submit">Sign In</button>
+            </form><br>
+            <div class="options">
+                Don't have an account? <a href="new_account.html">Sign Up</a><br>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>FORGOT PASSWORD?</h2>
+            <p>Enter your email address and we will send you a link to reset your password.</p>
+            <form action="/forgot-password" method="POST">
+                <label for="forgot-email">Your email</label>
+                <input type="email" id="forgot-email" name="forgot-email" placeholder="Your email" required>
+                <button type="submit">Send email</button>
+                <br><br>
+                <button type="submit" ><a href="reset.html" style="text-decoration: none; color: white;">Reset</a></button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Get modal element
+    var modal = document.getElementById("forgotModal");
+    // Get open modal button
+    var btn = document.getElementById("forgotPassword");
+    // Get close button
+    var span = document.getElementsByClassName("close")[0];
+
+    // Open the modal when the "Forgot Password?" is clicked
+    btn.onclick = function() {
+        modal.style.display = "flex";
+    }
+
+    // Close the modal when the close button is clicked
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Close the modal if clicking outside the modal content
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+    
+
+   <footer>
+    <p>&copy;2024 Book My Movie.<br> All rights reserved.</p>
+</footer>
+
+</body>
+</html>
