@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book My Movie</title>
+    <link rel="icon" href="../img/dup.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plaster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #f8f9fa; 
+        }
+        .main-content {
+            background-color: #ffffff; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+        .table {
+            width: 100%;
+            margin-top: 20px;
+        }
+        .table button {
+            margin: 10px;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+        }
+        .table th {
+            background-color: gold; 
+            color: black;
+            font-size: larger;
+        }
+        .modal-header{
+            background-color: gold; 
+            color: black;
+            text-align: center;
+            font-size: x-large;
+        }
+        .btn-primary {
+            background-color: gold; 
+            color: black;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+        }
+        .modal-header .btn-close {
+            color: #fff;
+        }
+        h2 {
+            color: goldenrod;
+            font-weight: 1000;
+        }
+    </style>
+</head>
+<body>
+    
+      
+    <header id="Home">
+        <div class="hero" >
+            <div class="hero-content">
+                
+            </div>
+        </div>
+    </header>
+    <h1 class="amal"><center>Welcome to Admin Page</center></h1>
+
+    <div id="navbar">
+        <a href="../admin.html">Admin Dashboard</a>
+      </div>
+ <br>
+
+ <main class="container my-4">
+    <div class="main-content">
+        <h2>Manage Ticket Prices</h2>
+       <!-- Prices Table -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="pricesTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Movie Name</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic price rows will be added here -->
+                </tbody>
+            </table><br>
+        </div>
+    </div>
+</main>
+
+<!-- Price Modal for Adding and Editing Prices -->
+<div class="modal fade" id="priceModal" tabindex="-1" aria-labelledby="priceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="priceModalLabel">Add Price</h5>
+            </div><br>
+            <div class="modal-body">
+                <center><form id="priceForm">
+                    <input type="hidden" id="priceId">
+                    <div class="mb-3">
+                        <label for="movieName" class="form-label">Movie Name</label>
+                        <input type="text" class="form-control" id="movieName" required>
+                    </div><br>
+                    <div class="mb-3">
+                        <label for="ticketPrice" class="form-label">Price</label>
+                        <input type="number" class="form-control" id="ticketPrice" required>
+                    </div><br>
+                    <button type="button" class="btn btn-primary" id="savePriceButton">Save Price</button>
+                </form></center>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    let priceID = 1;
+    let prices = JSON.parse(localStorage.getItem('prices')) || [];
+
+    // Load saved prices on page load
+    window.onload = () => {
+        loadPrices();
+    };
+
+    // Function to Load Prices from localStorage
+    function loadPrices() {
+        prices.forEach(price => addPriceToTable(price));
+        if (prices.length > 0) {
+            priceID = prices[prices.length - 1].id + 1;
+        }
+    }
+
+    // Function to Add or Update a Price
+    document.getElementById('savePriceButton').addEventListener('click', function() {
+        const movieName = document.getElementById('movieName').value;
+        const ticketPrice = document.getElementById('ticketPrice').value;
+        const priceId = document.getElementById('priceId').value;
+
+        if (movieName && ticketPrice) {
+            if (priceId) {
+                const priceIndex = prices.findIndex(p => p.id == priceId);
+                prices[priceIndex] = { id: parseInt(priceId), movieName, ticketPrice: parseFloat(ticketPrice) };
+                updateTableRow(priceId, movieName, ticketPrice);
+            } else {
+                const newPrice = { id: priceID++, movieName, ticketPrice: parseFloat(ticketPrice) };
+                prices.push(newPrice);
+                addPriceToTable(newPrice);
+            }
+            localStorage.setItem('prices', JSON.stringify(prices));
+            document.getElementById('priceForm').reset();
+            document.getElementById('priceId').value = '';
+            $('#priceModal').modal('hide');
+        }
+    });
+
+    // Function to Add Price to Table
+    function addPriceToTable(price) {
+        const tableBody = document.getElementById('pricesTable').querySelector('tbody');
+        const newRow = document.createElement('tr');
+        newRow.id = `row-${price.id}`;
+        newRow.innerHTML = `
+            <td>${price.id}</td>
+            <td>${price.movieName}</td>
+            <td>${price.ticketPrice.toFixed(2)}</td>
+            <td>
+                <button class="btn btn-warning btn-sm" onclick="editPrice(${price.id})">Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="deletePrice(${price.id})">Delete</button>
+            </td>
+        `;
+        tableBody.appendChild(newRow);
+    }
+
+    // Function to Update a Table Row
+    function updateTableRow(id, name, price) {
+        const row = document.getElementById(`row-${id}`);
+        row.children[1].textContent = name;
+        row.children[2].textContent = parseFloat(price).toFixed(2);
+    }
+
+    // Function to Edit Price
+    function editPrice(id) {
+        const price = prices.find(p => p.id == id);
+        document.getElementById('movieName').value = price.movieName;
+        document.getElementById('ticketPrice').value = price.ticketPrice;
+        document.getElementById('priceId').value = price.id;
+        $('#priceModal').modal('show');
+    }
+
+    // Function to Delete Price
+    function deletePrice(id) {
+        document.getElementById(`row-${id}`).remove();
+        prices = prices.filter(price => price.id != id);
+        localStorage.setItem('prices', JSON.stringify(prices));
+    }
+</script>
+
+<footer>
+    <p>&copy;2024 Book My Movie.<br> All rights reserved.</p>
+</footer>
+
+</body>
+</html>

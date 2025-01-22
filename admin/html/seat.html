@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book My Movie</title>
+    <link rel="icon" href="../img/dup.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plaster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #f8f9fa; 
+        }
+        .main-content {
+            background-color: #ffffff; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+        .table {
+            width: 100%;
+            margin-top: 20px;
+        }
+        .table button {
+            margin: 10px;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+        }
+        .table th {
+            background-color: gold; 
+            color: black;
+            font-size: larger;
+        }
+        .modal-header{
+            background-color: gold; 
+            color: black;
+            text-align: center;
+            font-size: x-large;
+        }
+        .btn-primary {
+            background-color: gold; 
+            color: black;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+        }
+        .modal-header .btn-close {
+            color: #fff;
+        }
+        h2 {
+            color: goldenrod;
+            font-weight: 1000;
+        }
+    </style>
+</head>
+<body>
+    
+      
+    <header id="Home">
+        <div class="hero" >
+            <div class="hero-content">
+                
+            </div>
+        </div>
+    </header>
+    <h1 class="amal"><center>Welcome to Admin Page</center></h1>
+
+    <div id="navbar">
+        <a href="../admin.html">Admin Dashboard</a>
+      </div>
+ <br>
+
+
+<main class="container my-4">
+    <div class="main-content">
+        <h2>Manage Seat Availability</h2>
+        <!-- Seats Table -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="seatsTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Seat Number</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic seat rows will be added here -->
+                </tbody>
+            </table><br>
+        </div>
+    </div>
+</main>
+
+<!-- Seat Modal for Adding and Editing Seats -->
+<div class="modal fade" id="seatModal" tabindex="-1" aria-labelledby="seatModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="seatModalLabel">Add Seat</h5>
+            </div><br>
+            <div class="modal-body">
+                <center><form id="seatForm">
+                    <input type="hidden" id="seatId">
+                    <div class="mb-3">
+                        <label for="seatNumber" class="form-label">Seat Number</label>
+                        <input type="text" class="form-control" id="seatNumber" required>
+                    </div><br>
+                    <div class="mb-3">
+                        <label for="seatStatus" class="form-label">Status</label>
+                        <select class="form-select" id="seatStatus" required>
+                            <option value="available">Available</option>
+                            <option value="booked">Booked</option>
+                        </select>
+                    </div><br>
+                    <button type="button" class="btn btn-primary" id="saveSeatButton">Save Seat</button>
+                </form></center>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    let seatID = 1;
+    let seats = JSON.parse(localStorage.getItem('seats')) || [];
+
+    // Load saved seats on page load
+    window.onload = () => {
+        loadSeats();
+    };
+
+    // Function to Load Seats from localStorage
+    function loadSeats() {
+        seats.forEach(seat => addSeatToTable(seat));
+        if (seats.length > 0) {
+            seatID = seats[seats.length - 1].id + 1;
+        }
+    }
+
+    // Function to Add or Update a Seat
+    document.getElementById('saveSeatButton').addEventListener('click', function() {
+        const seatNumber = document.getElementById('seatNumber').value;
+        const seatStatus = document.getElementById('seatStatus').value;
+        const seatId = document.getElementById('seatId').value;
+
+        if (seatNumber && seatStatus) {
+            if (seatId) {
+                const seatIndex = seats.findIndex(s => s.id == seatId);
+                seats[seatIndex] = { id: parseInt(seatId), seatNumber, seatStatus };
+                updateTableRow(seatId, seatNumber, seatStatus);
+            } else {
+                const newSeat = { id: seatID++, seatNumber, seatStatus };
+                seats.push(newSeat);
+                addSeatToTable(newSeat);
+            }
+            localStorage.setItem('seats', JSON.stringify(seats));
+            document.getElementById('seatForm').reset();
+            document.getElementById('seatId').value = '';
+            $('#seatModal').modal('hide');
+        }
+    });
+
+    // Function to Add Seat to Table
+    function addSeatToTable(seat) {
+        const tableBody = document.getElementById('seatsTable').querySelector('tbody');
+        const newRow = document.createElement('tr');
+        newRow.id = `row-${seat.id}`;
+        newRow.innerHTML = `
+            <td>${seat.id}</td>
+            <td>${seat.seatNumber}</td>
+            <td>${seat.seatStatus.charAt(0).toUpperCase() + seat.seatStatus.slice(1)}</td>
+            <td>
+                <button class="btn btn-warning btn-sm" onclick="editSeat(${seat.id})">Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteSeat(${seat.id})">Delete</button>
+            </td>
+        `;
+        tableBody.appendChild(newRow);
+    }
+
+    // Function to Update a Table Row
+    function updateTableRow(id, number, status) {
+        const row = document.getElementById(`row-${id}`);
+        row.children[1].textContent = number;
+        row.children[2].textContent = status.charAt(0).toUpperCase() + status.slice(1);
+    }
+
+    // Function to Edit Seat
+    function editSeat(id) {
+        const seat = seats.find(s => s.id == id);
+        document.getElementById('seatNumber').value = seat.seatNumber;
+        document.getElementById('seatStatus').value = seat.seatStatus;
+        document.getElementById('seatId').value = seat.id;
+        $('#seatModal').modal('show');
+    }
+
+    // Function to Delete Seat
+    function deleteSeat(id) {
+        document.getElementById(`row-${id}`).remove();
+        seats = seats.filter(seat => seat.id != id);
+        localStorage.setItem('seats', JSON.stringify(seats));
+    }
+</script>
+
+<footer>
+    <p>&copy;2024 Book My Movie.<br> All rights reserved.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book My Movie</title>
+    <link rel="icon" href="./img/dup.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plaster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+      
+    <header id="Home">
+        <div class="hero" >
+            <div class="hero-content">
+                
+            </div>
+        </div>
+    </header>
+    <h1 class="amal"><center>Welcome to Admin Page</center></h1>
+
+    <div id="navbar">
+        <a href="html/movie.html">Manage Movies</a>
+        <a href="html/theatre.html">Manage Theaters</a>
+        <a href="html/seat.html">Seat Availability</a>
+        <a href="html/opening.html">New Openings</a>
+        <a href="html/price.html">Manage Prices</a>
+      </div>
+ <br>
+
+ <section>
+    
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+              <img src="./img/cobra.jpg">
+            </div>
+            
+            <div class="mySlides fade">
+                <img src="./img/Tiger.jpg">
+              </div>
+
+              <div class="mySlides fade">
+                <img src="./img/Hindu.jpg">
+              </div>
+
+              <div class="mySlides fade">
+                <img src="./img/peakpx3.jpg">
+            </div>
+              
+            <div class="mySlides fade">
+                <img src="./img/peakpx4.jpg">
+            </div>
+              
+            <div class="mySlides fade">
+                <img src="./img/peakpx5.jpg">
+            </div>
+
+            <div class="mySlides fade">
+              <img src="./img/kalki.avif">
+            </div>
+            
+              <div class="mySlides fade">
+                <img src="./img/rrr.jpg">
+              </div>
+              
+              <div class="mySlides fade">
+                <img src="./img/pt.jfif">
+              </div>
+
+              <div class="mySlides fade">
+                <img src="./img/cooliepost.avif">
+              </div>
+
+              <div class="mySlides fade">
+                <img src="./img/men.jpg">
+              </div>
+
+              <div class="mySlides fade">
+                <img src="./img/endgame.jpg">
+              </div>
+
+              <div class="mySlides fade">
+                <img src="./img/goatpost.webp">
+              </div>
+
+              <div class="mySlides fade">
+                <img src="./img/vikram.jpg">
+              </div>
+            </div>
+            
+            <div style="text-align:center">
+              <span class="dot"></span> 
+              <span class="dot"></span> 
+              <span class="dot"></span> 
+              <span class="dot"></span> 
+              <span class="dot"></span>
+              <span class="dot"></span> 
+              <span class="dot"></span>
+              <span class="dot"></span> 
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+      
+    
+ </section>
+
+<script>
+    let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
+
+<footer>
+    <p>&copy;2024 Book My Movie.<br> All rights reserved.</p>
+</footer>
+
+</body>
+</html>

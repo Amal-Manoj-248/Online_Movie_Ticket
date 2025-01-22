@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book My Movie</title>
+    <link rel="icon" href="../img/dup.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plaster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: #f8f9fa; 
+        }
+        .main-content {
+            background-color: #ffffff; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+        .table {
+            width: 100%;
+            margin-top: 20px;
+        }
+        .table button {
+            margin: 10px;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+        }
+        .table th {
+            background-color: gold; 
+            color: black;
+            font-size: larger;
+        }
+        .modal-header{
+            background-color: gold; 
+            color: black;
+            text-align: center;
+            font-size: x-large;
+        }
+        .btn-primary {
+            background-color: gold; 
+            color: black;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+        }
+        .modal-header .btn-close {
+            color: #fff;
+        }
+        h2 {
+            color: goldenrod;
+            font-weight: 1000;
+        }
+    </style>
+</head>
+<body>
+    
+      
+    <header id="Home">
+        <div class="hero" >
+            <div class="hero-content">
+                
+            </div>
+        </div>
+    </header>
+    <h1 class="amal"><center>Welcome to Admin Page</center></h1>
+
+    <div id="navbar">
+        <a href="../admin.html">Admin Dashboard</a>
+      </div>
+ <br>
+
+ <main class="container my-4">
+    <div class="main-content">
+        <h2>Manage New Openings</h2>
+        <!-- New Openings Table -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover" id="openingsTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Theater Name</th>
+                        <th>Opening Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic opening rows will be added here -->
+                </tbody>
+            </table><br>
+        </div>
+    </div>
+</main>
+
+<!-- Opening Modal for Adding and Editing New Openings -->
+<div class="modal fade" id="openingModal" tabindex="-1" aria-labelledby="openingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="openingModalLabel">Add New Opening</h5>
+            </div><br>
+            <div class="modal-body">
+                <center><form id="openingForm">
+                    <input type="hidden" id="openingId">
+                    <div class="mb-3">
+                        <label for="theaterName" class="form-label">Theater Name</label>
+                        <input type="text" class="form-control" id="theaterName" required>
+                    </div><br>
+                    <div class="mb-3">
+                        <label for="openingDate" class="form-label">Opening Date</label>
+                        <input type="date" class="form-control" id="openingDate" required>
+                    </div><br>
+                    <button type="button" class="btn btn-primary" id="saveOpeningButton">Save Opening</button>
+                </form>
+            </div></center>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    let openingID = 1;
+    let openings = JSON.parse(localStorage.getItem('openings')) || [];
+
+    // Load saved openings on page load
+    window.onload = () => {
+        loadOpenings();
+    };
+
+    // Function to Load Openings from localStorage
+    function loadOpenings() {
+        openings.forEach(opening => addOpeningToTable(opening));
+        if (openings.length > 0) {
+            openingID = openings[openings.length - 1].id + 1;
+        }
+    }
+
+    // Function to Add or Update a New Opening
+    document.getElementById('saveOpeningButton').addEventListener('click', function() {
+        const theaterName = document.getElementById('theaterName').value;
+        const openingDate = document.getElementById('openingDate').value;
+        const openingId = document.getElementById('openingId').value;
+
+        if (theaterName && openingDate) {
+            if (openingId) {
+                const openingIndex = openings.findIndex(o => o.id == openingId);
+                openings[openingIndex] = { id: parseInt(openingId), theaterName, openingDate };
+                updateTableRow(openingId, theaterName, openingDate);
+            } else {
+                const newOpening = { id: openingID++, theaterName, openingDate };
+                openings.push(newOpening);
+                addOpeningToTable(newOpening);
+            }
+            localStorage.setItem('openings', JSON.stringify(openings));
+            document.getElementById('openingForm').reset();
+            document.getElementById('openingId').value = '';
+            $('#openingModal').modal('hide');
+        }
+    });
+
+    // Function to Add Opening to Table
+    function addOpeningToTable(opening) {
+        const tableBody = document.getElementById('openingsTable').querySelector('tbody');
+        const newRow = document.createElement('tr');
+        newRow.id = `row-${opening.id}`;
+        newRow.innerHTML = `
+            <td>${opening.id}</td>
+            <td>${opening.theaterName}</td>
+            <td>${opening.openingDate}</td>
+            <td>
+                <button class="btn btn-warning btn-sm" onclick="editOpening(${opening.id})">Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteOpening(${opening.id})">Delete</button>
+            </td>
+        `;
+        tableBody.appendChild(newRow);
+    }
+
+    // Function to Update a Table Row
+    function updateTableRow(id, name, date) {
+        const row = document.getElementById(`row-${id}`);
+        row.children[1].textContent = name;
+        row.children[2].textContent = date;
+    }
+
+    // Function to Edit Opening
+    function editOpening(id) {
+        const opening = openings.find(o => o.id == id);
+        document.getElementById('theaterName').value = opening.theaterName;
+        document.getElementById('openingDate').value = opening.openingDate;
+        document.getElementById('openingId').value = opening.id;
+        $('#openingModal').modal('show');
+    }
+
+    // Function to Delete Opening
+    function deleteOpening(id) {
+        document.getElementById(`row-${id}`).remove();
+        openings = openings.filter(opening => opening.id != id);
+        localStorage.setItem('openings', JSON.stringify(openings));
+    }
+</script>
+
+<footer>
+    <p>&copy;2024 Book My Movie.<br> All rights reserved.</p>
+</footer>
+
+</body>
+</html>
